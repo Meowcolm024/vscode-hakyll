@@ -2,6 +2,7 @@
 	"name": "vscode-hakyll",
 	"displayName": "vscode-hakyll",
 	"description": "Simple Hakyll support for VSCode",
+	"icon": "images/lambda.png",
 	"version": "0.0.1",
 	"publisher": "Meowcolm024",
 	"license": "MIT",
