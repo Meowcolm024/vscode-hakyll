@@ -2,9 +2,6 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 
-const pages_url = vscode.workspace.getConfiguration().get('scode-hakyll.GitHubPagesURL');
-const pages_branch = vscode.workspace.getConfiguration().get('vscode-hakyll.GitHubPagesBranch');
-
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export function activate(context: vscode.ExtensionContext) {
@@ -18,7 +15,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The commandId parameter must match the command field in package.json
 	let newPost = vscode.commands.registerCommand('vscode-hakyll.newPost', () => {
 		let d = new Date();
-		let date = String(d.getFullYear()) + '-' + String(d.getMonth()) + '-' + String(d.getDate());
+		let date = d.toISOString().slice(0,10);
 		const options = {
 			ignoreFocusOut: true,
 			password: false,
@@ -29,6 +26,12 @@ export function activate(context: vscode.ExtensionContext) {
 				vscode.window.showInformationMessage('Please type the title of your post');
 			} else {
 				const title = value.trim();
+				let name = date + '-' + title.toLowerCase().split(' ').join('-') + '.md';
+				let terminal = vscode.window.createTerminal("New Post");
+				terminal.sendText('cd posts');
+				terminal.sendText('echo --- >> ' + name);
+				terminal.sendText('echo title: ' + title + ' >> ' + name);
+				terminal.sendText('echo --- >> ' + name);
 				vscode.window.showInformationMessage('Creating post: \"' + title + '\" please wait.');
 			}});
 	});
@@ -47,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let deploy = vscode.commands.registerCommand('vscode-hakyll.deploy', () => {
 		let d = new Date();
-		let date = String(d.getFullYear()) + '-' + String(d.getMonth()) + '-' + String(d.getDate());
+		let date = d.toISOString().slice(0,10);
 		let terminal = vscode.window.createTerminal("Deploy");
 		terminal.sendText('cp -a _site/. _public/');
 		terminal.sendText('cd _public');
@@ -55,6 +58,24 @@ export function activate(context: vscode.ExtensionContext) {
 		terminal.sendText('git push');
 		//terminal.show();
 	})
+
+	let statPost = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 10);
+	statPost.text = "New Post";
+	statPost.command = 'vscode-hakyll.newPost';
+	statPost.show();
+	context.subscriptions.push(statPost);
+
+	let statGen = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 10);
+	statGen.text = "Generate";
+	statGen.command = 'vscode-hakyll.generateSite';
+	statGen.show();
+	context.subscriptions.push(statGen);
+
+	let statDeploy = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 10);
+	statDeploy.text = "Deploy";
+	statDeploy.command = 'vscode-hakyll.deploy';
+	statDeploy.show();
+	context.subscriptions.push(statDeploy);
 
 	context.subscriptions.push(newPost);
 	context.subscriptions.push(generate);

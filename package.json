@@ -40,22 +40,7 @@
 				"title": "Start Preview Server",
 				"category": "hakyll"
 			}
-		],
-		"configuration": [{
-			"title": "vscode-hakyll",
-			"properties": {
-				"vscode-hakyll.GitHubPagesURL": {
-					"type": "string",
-					"default": null,
-					"description": "The url of your GitHub Pages"
-				},
-				"vscode-hakyll.GitHubPagesBranch": {
-					"type": "string",
-					"default": "master",
-					"description": "The branch of the GitHub pages repo"
-				}
-			}
-		}]
+		]
 	},
 	"scripts": {
 		"vscode:prepublish": "npm run compile",
