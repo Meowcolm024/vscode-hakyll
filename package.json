@@ -1,0 +1,74 @@
+{
+	"name": "vscode-hakyll",
+	"displayName": "vscode-hakyll",
+	"description": "Simple Hakyll support for VSCode",
+	"version": "0.0.1",
+	"publisher": "Meowcolm024",
+	"license": "MIT",
+	"engines": {
+		"vscode": "^1.41.0"
+	},
+	"categories": [
+		"Other"
+	],
+	"activationEvents": [
+		"onCommand:vscode-hakyll.newPost",
+		"onCommand:vscode-hakyll.deploy",
+		"onCommand:vscode-hakyll.generateSite",
+		"onCommand:vscode-hakyll.previewServer",
+		"workspaceContains:posts"
+	],
+	"main": "./out/extension.js",
+	"contributes": {
+		"commands": [{
+				"command": "vscode-hakyll.newPost",
+				"title": "Create new Hakyll Post",
+				"category": "Hakyll"
+			},
+			{
+				"command": "vscode-hakyll.deploy",
+				"title": "Deploy Hakyll",
+				"category": "hakyll"
+			},
+			{
+				"command": "vscode-hakyll.generateSite",
+				"title": "Generate Site",
+				"category": "hakyll"
+			},
+			{
+				"command": "vscode-hakyll.previewServer",
+				"title": "Start Preview Server",
+				"category": "hakyll"
+			}
+		],
+		"configuration": [{
+			"title": "vscode-hakyll",
+			"properties": {
+				"vscode-hakyll.GitHubPagesURL": {
+					"type": "string",
+					"default": null,
+					"description": "The url of your GitHub Pages"
+				},
+				"vscode-hakyll.GitHubPagesBranch": {
+					"type": "string",
+					"default": "master",
+					"description": "The branch of the GitHub pages repo"
+				}
+			}
+		}]
+	},
+	"scripts": {
+		"vscode:prepublish": "npm run compile",
+		"compile": "tsc -p ./",
+		"watch": "tsc -watch -p ./",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "npm run compile && node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"typescript": "^3.1.4",
+		"vscode": "^1.1.25",
+		"tslint": "^5.8.0",
+		"@types/node": "^8.10.25",
+		"@types/mocha": "^2.2.42"
+	}
+}
