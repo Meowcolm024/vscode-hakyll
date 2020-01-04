@@ -6,6 +6,10 @@
 	"version": "0.0.1",
 	"publisher": "Meowcolm024",
 	"license": "MIT",
+	"repository": {
+		"url": "https://Meltryllis@bitbucket.org/Meltryllis/vscode-hakyll.git",
+		"type": "git"
+	},
 	"engines": {
 		"vscode": "^1.41.0"
 	},
