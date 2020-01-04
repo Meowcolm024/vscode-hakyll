@@ -50,7 +50,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 	let deploy = vscode.commands.registerCommand('vscode-hakyll.deploy', () => {
 		let d = new Date();
-		let date = d.toISOString().slice(0,10);
+		let date = d.toISOString();
 		let terminal = vscode.window.createTerminal("Deploy");
 		terminal.sendText('cp -a _site/. _public/');
 		terminal.sendText('cd _public');

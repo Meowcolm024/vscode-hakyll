@@ -3,11 +3,11 @@
 	"displayName": "vscode-hakyll",
 	"description": "Simple Hakyll support for VSCode",
 	"icon": "images/lambda.png",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "Meowcolm024",
 	"license": "MIT",
 	"repository": {
-		"url": "https://Meltryllis@bitbucket.org/Meltryllis/vscode-hakyll.git",
+		"url": "https://github.com/Meowcolm024/vscode-hakyll",
 		"type": "git"
 	},
 	"engines": {
